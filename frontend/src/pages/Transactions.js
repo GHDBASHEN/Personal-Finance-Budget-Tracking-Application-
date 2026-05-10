@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import Modal from '../components/Modal';
 import { Plus, Edit2, Trash2, Filter } from 'lucide-react';
+import Loader from '../components/Loader';
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -91,7 +92,7 @@ const Transactions = () => {
     setIsModalOpen(true);
   };
 
-  if (loading) return <div className="p-8 text-slate-500">Loading transactions...</div>;
+  if (loading) return <Loader text="Loading transactions..." />;
 
   const relevantCategories = categories.filter(c => c.type === type);
 

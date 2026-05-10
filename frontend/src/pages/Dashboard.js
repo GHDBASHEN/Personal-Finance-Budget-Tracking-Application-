@@ -5,6 +5,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, Wallet, Activity } from 'lucide-react';
+import Loader from '../components/Loader';
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
@@ -24,8 +25,8 @@ const Dashboard = () => {
     fetchDashboard();
   }, []);
 
-  if (loading) return <div className="p-8 text-slate-500">Loading dashboard...</div>;
-  if (!data) return <div className="p-8 text-slate-500">Failed to load dashboard</div>;
+  if (loading) return <Loader text="Loading dashboard..." />;
+  if (!data) return <div className="p-8 text-slate-500 text-center mt-10">Failed to load dashboard</div>;
 
   const COLORS = ['#3b82f6', '#10b981', '#8b5cf6', '#ef4444', '#f59e0b', '#06b6d4'];
 

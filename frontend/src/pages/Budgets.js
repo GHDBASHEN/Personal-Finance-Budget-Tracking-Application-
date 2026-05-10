@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import Modal from '../components/Modal';
 import { Plus, Edit2, Trash2, AlertTriangle } from 'lucide-react';
+import Loader from '../components/Loader';
 
 const Budgets = () => {
   const [budgets, setBudgets] = useState([]);
@@ -77,7 +78,7 @@ const Budgets = () => {
     setIsModalOpen(true);
   };
 
-  if (loading) return <div className="p-8 text-slate-500">Loading budgets...</div>;
+  if (loading) return <Loader text="Loading budgets..." />;
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
