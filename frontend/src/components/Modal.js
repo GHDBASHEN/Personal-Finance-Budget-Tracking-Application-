@@ -24,7 +24,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
       />
       
       {/* Modal Content */}
-      <div className="relative glass-panel w-full max-w-md animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative glass-panel w-full max-w-md max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-6 border-b border-slate-200">
           <h2 className="text-xl font-semibold text-slate-900">{title}</h2>
           <button 

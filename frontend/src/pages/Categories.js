@@ -70,7 +70,7 @@ const Categories = () => {
   if (loading) return <div className="p-8 text-slate-500">Loading categories...</div>;
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-slate-900">Categories</h1>
         <button onClick={() => openModal()} className="btn-primary flex items-center gap-2">

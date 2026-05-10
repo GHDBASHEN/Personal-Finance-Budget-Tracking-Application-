@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen bg-background">
       {user && <Navbar />}
-      <main className={`${user ? 'ml-64' : ''}`}>
+      <main className={`${user ? 'md:ml-64 pb-20 md:pb-0' : ''}`}>
         {children}
       </main>
     </div>

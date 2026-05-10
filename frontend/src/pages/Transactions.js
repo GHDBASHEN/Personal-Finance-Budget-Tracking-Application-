@@ -96,7 +96,7 @@ const Transactions = () => {
   const relevantCategories = categories.filter(c => c.type === type);
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <h1 className="text-3xl font-bold text-slate-900">Transactions</h1>
         
@@ -132,10 +132,11 @@ const Transactions = () => {
       </div>
 
       <div className="glass-panel overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-white border-b border-slate-200 text-slate-500 text-sm">
+              <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-sm">
                 <th className="p-4 font-medium">Date</th>
                 <th className="p-4 font-medium">Title</th>
                 <th className="p-4 font-medium">Category</th>
@@ -187,6 +188,42 @@ const Transactions = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Card View */}
+        <div className="md:hidden divide-y divide-slate-200">
+          {transactions.length === 0 ? (
+            <div className="p-8 text-center text-slate-500">No transactions found</div>
+          ) : (
+            transactions.map((tx) => (
+              <div key={tx._id} className="p-4 flex flex-col gap-3 bg-white/50 hover:bg-slate-50 transition-colors">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="font-medium text-slate-800">{tx.title}</p>
+                    <p className="text-sm text-slate-500">{tx.category?.name || 'Uncategorized'} • {new Date(tx.date).toLocaleDateString()}</p>
+                  </div>
+                  <div className={`font-medium ${tx.type === 'income' ? 'text-secondary' : 'text-danger'}`}>
+                    {tx.type === 'income' ? '+' : '-'}${tx.amount.toFixed(2)}
+                  </div>
+                </div>
+                {tx.note && <p className="text-sm text-slate-600 bg-slate-100 p-2 rounded-md">{tx.note}</p>}
+                <div className="flex justify-end gap-2 pt-2">
+                  <button 
+                    onClick={() => openModal(tx)}
+                    className="p-2 text-slate-500 hover:text-slate-900 bg-slate-100 rounded-lg transition-colors"
+                  >
+                    <Edit2 size={16} />
+                  </button>
+                  <button 
+                    onClick={() => handleDelete(tx._id)}
+                    className="p-2 text-danger hover:bg-danger/20 bg-danger/10 rounded-lg transition-colors"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
