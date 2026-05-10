@@ -83,7 +83,7 @@ const Transactions = () => {
       setEditingTx(null);
       setTitle('');
       setAmount('');
-      setCategory(categories.length > 0 ? categories[0]._id : '');
+      setCategory(''); // Force user to explicitly select category
       setType('expense');
       setDate(new Date().toISOString().split('T')[0]);
       setNote('');

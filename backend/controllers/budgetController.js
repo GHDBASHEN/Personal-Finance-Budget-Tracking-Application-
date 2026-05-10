@@ -8,20 +8,37 @@ const getBudgets = async (req, res) => {
   try {
     const budgets = await Budget.find({ user: req.user._id }).populate('category', 'name');
     
-    // Calculate current spending for each budget
-    const startOfMonth = new Date();
-    startOfMonth.setDate(1);
-    startOfMonth.setHours(0, 0, 0, 0);
-
     const budgetsWithProgress = await Promise.all(budgets.map(async (budget) => {
+      if (!budget.category) {
+        return {
+          ...budget.toObject(),
+          spent: 0
+        };
+      }
+
+      let startDate = new Date();
+      startDate.setHours(0, 0, 0, 0);
+      
+      if (budget.period === 'Weekly') {
+        const day = startDate.getDay();
+        const diff = startDate.getDate() - day + (day === 0 ? -6 : 1);
+        startDate.setDate(diff);
+      } else if (budget.period === 'Yearly') {
+        startDate.setMonth(0, 1);
+      } else {
+        startDate.setDate(1); // Monthly default
+      }
+
       const transactions = await Transaction.find({
         user: req.user._id,
         category: budget.category._id,
         type: 'expense',
-        date: { $gte: startOfMonth }
+        date: { $gte: startDate }
       });
       
       const spent = transactions.reduce((acc, curr) => acc + curr.amount, 0);
+      console.log(`Budget for ${budget.category.name}: amount=${budget.amount}, spent=${spent}, period=${budget.period}, startDate=${startDate}`);
+      
       return {
         ...budget.toObject(),
         spent

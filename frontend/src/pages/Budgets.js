@@ -70,7 +70,7 @@ const Budgets = () => {
       setPeriod(budget.period);
     } else {
       setEditingBudget(null);
-      setCategory(categories[0]?._id || '');
+      setCategory(''); // Force user to explicitly select category
       setAmount('');
       setPeriod('Monthly');
     }
@@ -91,7 +91,8 @@ const Budgets = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {budgets.map((budget) => {
-          const percentUsed = Math.min((budget.spent / budget.amount) * 100, 100);
+          const safeAmount = budget.amount > 0 ? budget.amount : 1;
+          const percentUsed = Math.min((budget.spent / safeAmount) * 100, 100);
           const isOverBudget = budget.spent > budget.amount;
           const isNearLimit = percentUsed >= 80 && !isOverBudget;
 
