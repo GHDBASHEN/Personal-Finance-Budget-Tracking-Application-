@@ -28,10 +28,10 @@ const Navbar = () => {
       <nav className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-surface border-r border-slate-200 p-4 flex-col z-50">
         <div className="flex items-center gap-3 mb-10 px-2">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-xl">
-            F
+            BT
           </div>
           <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-            FinTrack
+            Budget Track
           </h1>
         </div>
 
@@ -42,11 +42,10 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
-                  isActive
-                    ? 'bg-primary/10 text-primary font-medium'
-                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
-                }`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${isActive
+                  ? 'bg-primary/10 text-primary font-medium'
+                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+                  }`}
               >
                 <div className={`${isActive ? 'text-primary' : 'text-slate-500'}`}>
                   {item.icon}
@@ -80,9 +79,8 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.path}
-              className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-300 ${
-                isActive ? 'text-primary' : 'text-slate-500 hover:text-slate-800'
-              }`}
+              className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-300 ${isActive ? 'text-primary' : 'text-slate-500 hover:text-slate-800'
+                }`}
             >
               <div className={`${isActive ? 'text-primary' : 'text-slate-500'}`}>
                 {React.cloneElement(item.icon, { size: 24 })}
