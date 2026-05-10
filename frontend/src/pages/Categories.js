@@ -67,12 +67,12 @@ const Categories = () => {
     setIsModalOpen(true);
   };
 
-  if (loading) return <div className="p-8 text-slate-400">Loading categories...</div>;
+  if (loading) return <div className="p-8 text-slate-500">Loading categories...</div>;
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-white">Categories</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Categories</h1>
         <button onClick={() => openModal()} className="btn-primary flex items-center gap-2">
           <Plus size={20} />
           New Category
@@ -91,7 +91,7 @@ const Categories = () => {
               <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
                   onClick={() => openModal(category)}
-                  className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                  className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
                 >
                   <Edit2 size={18} />
                 </button>
@@ -103,11 +103,11 @@ const Categories = () => {
                 </button>
               </div>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-1 flex items-center gap-2">
+            <h3 className="text-xl font-semibold text-slate-900 mb-1 flex items-center gap-2">
               <Tag size={18} className="text-slate-500" />
               {category.name}
             </h3>
-            <p className="text-sm text-slate-400 capitalize">{category.type}</p>
+            <p className="text-sm text-slate-500 capitalize">{category.type}</p>
           </div>
         ))}
       </div>
@@ -119,7 +119,7 @@ const Categories = () => {
       >
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Category Name</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Category Name</label>
             <input
               type="text"
               required
@@ -130,7 +130,7 @@ const Categories = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Type</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Type</label>
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
@@ -138,7 +138,7 @@ const Categories = () => {
                 className={`py-2 px-4 rounded-lg border font-medium transition-all ${
                   type === 'expense' 
                     ? 'bg-danger/20 border-danger text-danger' 
-                    : 'border-slate-600 text-slate-400 hover:border-slate-500'
+                    : 'border-slate-300 text-slate-500 hover:border-slate-400'
                 }`}
               >
                 Expense
@@ -149,7 +149,7 @@ const Categories = () => {
                 className={`py-2 px-4 rounded-lg border font-medium transition-all ${
                   type === 'income' 
                     ? 'bg-secondary/20 border-secondary text-secondary' 
-                    : 'border-slate-600 text-slate-400 hover:border-slate-500'
+                    : 'border-slate-300 text-slate-500 hover:border-slate-400'
                 }`}
               >
                 Income

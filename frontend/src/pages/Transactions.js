@@ -91,20 +91,20 @@ const Transactions = () => {
     setIsModalOpen(true);
   };
 
-  if (loading) return <div className="p-8 text-slate-400">Loading transactions...</div>;
+  if (loading) return <div className="p-8 text-slate-500">Loading transactions...</div>;
 
   const relevantCategories = categories.filter(c => c.type === type);
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h1 className="text-3xl font-bold text-white">Transactions</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Transactions</h1>
         
         <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2 bg-slate-800/50 p-2 rounded-lg border border-slate-700/50">
-            <Filter size={16} className="text-slate-400" />
+          <div className="flex items-center gap-2 bg-white p-2 rounded-lg border border-slate-200">
+            <Filter size={16} className="text-slate-500" />
             <select 
-              className="bg-transparent text-sm text-slate-200 outline-none"
+              className="bg-transparent text-sm text-slate-800 outline-none"
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
             >
@@ -113,7 +113,7 @@ const Transactions = () => {
               <option value="expense">Expense</option>
             </select>
             <select 
-              className="bg-transparent text-sm text-slate-200 outline-none border-l border-slate-700 pl-2 ml-1"
+              className="bg-transparent text-sm text-slate-800 outline-none border-l border-slate-200 pl-2 ml-1"
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
             >
@@ -135,7 +135,7 @@ const Transactions = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-800/50 border-b border-slate-700/50 text-slate-400 text-sm">
+              <tr className="bg-white border-b border-slate-200 text-slate-500 text-sm">
                 <th className="p-4 font-medium">Date</th>
                 <th className="p-4 font-medium">Title</th>
                 <th className="p-4 font-medium">Category</th>
@@ -152,15 +152,15 @@ const Transactions = () => {
                 </tr>
               ) : (
                 transactions.map((tx) => (
-                  <tr key={tx._id} className="border-b border-slate-700/50 hover:bg-slate-800/30 transition-colors group">
-                    <td className="p-4 text-slate-300">
+                  <tr key={tx._id} className="border-b border-slate-200 hover:bg-slate-50 transition-colors group">
+                    <td className="p-4 text-slate-700">
                       {new Date(tx.date).toLocaleDateString()}
                     </td>
                     <td className="p-4">
-                      <p className="font-medium text-slate-200">{tx.title}</p>
+                      <p className="font-medium text-slate-800">{tx.title}</p>
                       {tx.note && <p className="text-xs text-slate-500 truncate max-w-xs">{tx.note}</p>}
                     </td>
-                    <td className="p-4 text-slate-400">
+                    <td className="p-4 text-slate-500">
                       {tx.category?.name || 'Uncategorized'}
                     </td>
                     <td className={`p-4 text-right font-medium ${tx.type === 'income' ? 'text-secondary' : 'text-danger'}`}>
@@ -170,7 +170,7 @@ const Transactions = () => {
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button 
                           onClick={() => openModal(tx)}
-                          className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                          className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
                         >
                           <Edit2 size={16} />
                         </button>
@@ -203,7 +203,7 @@ const Transactions = () => {
               className={`py-2 px-4 rounded-lg border font-medium transition-all ${
                 type === 'expense' 
                   ? 'bg-danger/20 border-danger text-danger' 
-                  : 'border-slate-600 text-slate-400 hover:border-slate-500'
+                  : 'border-slate-300 text-slate-500 hover:border-slate-400'
               }`}
             >
               Expense
@@ -214,7 +214,7 @@ const Transactions = () => {
               className={`py-2 px-4 rounded-lg border font-medium transition-all ${
                 type === 'income' 
                   ? 'bg-secondary/20 border-secondary text-secondary' 
-                  : 'border-slate-600 text-slate-400 hover:border-slate-500'
+                  : 'border-slate-300 text-slate-500 hover:border-slate-400'
               }`}
             >
               Income
@@ -222,7 +222,7 @@ const Transactions = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Title</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Title</label>
             <input
               type="text"
               required
@@ -235,7 +235,7 @@ const Transactions = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Amount ($)</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Amount ($)</label>
               <input
                 type="number"
                 required
@@ -248,11 +248,11 @@ const Transactions = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Date</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Date</label>
               <input
                 type="date"
                 required
-                className="input-field text-slate-300"
+                className="input-field text-slate-700"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
               />
@@ -260,10 +260,10 @@ const Transactions = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Category</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Category</label>
             <select
               required
-              className="input-field text-slate-300"
+              className="input-field text-slate-700"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
@@ -275,7 +275,7 @@ const Transactions = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Note (Optional)</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Note (Optional)</label>
             <textarea
               className="input-field min-h-[80px]"
               placeholder="Add some details..."

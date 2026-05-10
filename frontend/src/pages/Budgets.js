@@ -77,12 +77,12 @@ const Budgets = () => {
     setIsModalOpen(true);
   };
 
-  if (loading) return <div className="p-8 text-slate-400">Loading budgets...</div>;
+  if (loading) return <div className="p-8 text-slate-500">Loading budgets...</div>;
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-white">Budgets</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Budgets</h1>
         <button onClick={() => openModal()} className="btn-primary flex items-center gap-2">
           <Plus size={20} />
           New Budget
@@ -100,13 +100,13 @@ const Budgets = () => {
             <div key={budget._id} className="glass-panel p-6 group">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white">{budget.category?.name || 'Unknown'}</h3>
-                  <p className="text-sm text-slate-400">{budget.period}</p>
+                  <h3 className="text-xl font-semibold text-slate-900">{budget.category?.name || 'Unknown'}</h3>
+                  <p className="text-sm text-slate-500">{budget.period}</p>
                 </div>
                 <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button 
                     onClick={() => openModal(budget)}
-                    className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                    className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
                   >
                     <Edit2 size={18} />
                   </button>
@@ -121,12 +121,12 @@ const Budgets = () => {
 
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-400">Spent: <span className="text-white font-medium">${budget.spent.toFixed(2)}</span></span>
-                  <span className="text-slate-400">Budget: <span className="text-white font-medium">${budget.amount.toFixed(2)}</span></span>
+                  <span className="text-slate-500">Spent: <span className="text-slate-900 font-medium">${budget.spent.toFixed(2)}</span></span>
+                  <span className="text-slate-500">Budget: <span className="text-slate-900 font-medium">${budget.amount.toFixed(2)}</span></span>
                 </div>
                 
                 {/* Progress bar background */}
-                <div className="h-3 w-full bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
                   {/* Progress bar fill */}
                   <div 
                     className={`h-full rounded-full transition-all duration-1000 ease-out ${
@@ -163,7 +163,7 @@ const Budgets = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {!editingBudget && (
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Category</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Category</label>
               <select
                 required
                 className="input-field"
@@ -178,7 +178,7 @@ const Budgets = () => {
             </div>
           )}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Amount ($)</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Amount ($)</label>
             <input
               type="number"
               required
@@ -191,7 +191,7 @@ const Budgets = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Period</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Period</label>
             <select
               required
               className="input-field"
