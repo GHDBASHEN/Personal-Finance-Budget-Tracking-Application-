@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../services/api';
+import { getDashboardSummary } from '../services/dashboardService';
 import { 
   PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend
@@ -14,7 +14,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const res = await api.get('/dashboard/summary');
+        const res = await getDashboardSummary();
         setData(res.data);
       } catch (error) {
         console.error('Error fetching dashboard data', error);

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import api from '../services/api';
+import { getMe, login as loginApi, register as registerApi } from '../services/authService';
 
 export const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const { data } = await api.get('/auth/me');
+          const { data } = await getMe();
           setUser(data);
         } catch (error) {
           console.error('Error fetching user', error);
@@ -26,13 +26,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const { data } = await api.post('/auth/login', { email, password });
+    const { data } = await loginApi({ email, password });
     localStorage.setItem('token', data.token);
     setUser(data);
   };
 
   const register = async (username, email, password) => {
-    const { data } = await api.post('/auth/register', { username, email, password });
+    const { data } = await registerApi({ username, email, password });
     localStorage.setItem('token', data.token);
     setUser(data);
   };

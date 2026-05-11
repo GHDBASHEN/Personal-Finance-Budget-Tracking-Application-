@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
+import { getTransactions, createTransaction, updateTransaction, deleteTransaction } from '../services/transactionService';
+import { getCategories } from '../services/categoryService';
 import Modal from '../components/Modal';
 import { Plus, Edit2, Trash2, Filter } from 'lucide-react';
 import Loader from '../components/Loader';
@@ -26,8 +27,8 @@ const Transactions = () => {
   const fetchData = async () => {
     try {
       const [txRes, catRes] = await Promise.all([
-        api.get('/transactions', { params: { type: filterType, category: filterCategory } }),
-        api.get('/categories')
+        getTransactions({ type: filterType, category: filterCategory }),
+        getCategories()
       ]);
       setTransactions(txRes.data);
       setCategories(catRes.data);
@@ -48,9 +49,9 @@ const Transactions = () => {
     try {
       const payload = { title, amount: Number(amount), category, type, date, note };
       if (editingTx) {
-        await api.put(`/transactions/${editingTx._id}`, payload);
+        await updateTransaction(editingTx._id, payload);
       } else {
-        await api.post('/transactions', payload);
+        await createTransaction(payload);
       }
       setIsModalOpen(false);
       fetchData();
@@ -63,7 +64,7 @@ const Transactions = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this transaction?')) {
       try {
-        await api.delete(`/transactions/${id}`);
+        await deleteTransaction(id);
         fetchData();
       } catch (error) {
         console.error('Failed to delete transaction', error);

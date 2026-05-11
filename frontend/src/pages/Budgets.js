@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
+import { getBudgets, createBudget, updateBudget, deleteBudget } from '../services/budgetService';
+import { getCategories } from '../services/categoryService';
 import Modal from '../components/Modal';
 import { Plus, Edit2, Trash2, AlertTriangle } from 'lucide-react';
 import Loader from '../components/Loader';
@@ -19,8 +20,8 @@ const Budgets = () => {
   const fetchData = async () => {
     try {
       const [budgetsRes, categoriesRes] = await Promise.all([
-        api.get('/budgets'),
-        api.get('/categories')
+        getBudgets(),
+        getCategories()
       ]);
       setBudgets(budgetsRes.data);
       // Only show expense categories for budgets
@@ -40,9 +41,9 @@ const Budgets = () => {
     e.preventDefault();
     try {
       if (editingBudget) {
-        await api.put(`/budgets/${editingBudget._id}`, { amount: Number(amount), period });
+        await updateBudget(editingBudget._id, { amount: Number(amount), period });
       } else {
-        await api.post('/budgets', { category, amount: Number(amount), period });
+        await createBudget({ category, amount: Number(amount), period });
       }
       setIsModalOpen(false);
       fetchData();
@@ -55,7 +56,7 @@ const Budgets = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this budget?')) {
       try {
-        await api.delete(`/budgets/${id}`);
+        await deleteBudget(id);
         fetchData();
       } catch (error) {
         console.error('Failed to delete budget', error);

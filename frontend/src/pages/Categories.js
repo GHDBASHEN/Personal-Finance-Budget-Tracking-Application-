@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
+import { getCategories, createCategory, updateCategory, deleteCategory } from '../services/categoryService';
 import Modal from '../components/Modal';
 import { Plus, Edit2, Trash2, Tag, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import Loader from '../components/Loader';
@@ -16,7 +16,7 @@ const Categories = () => {
 
   const fetchCategories = async () => {
     try {
-      const { data } = await api.get('/categories');
+      const { data } = await getCategories();
       setCategories(data);
     } catch (error) {
       console.error('Failed to fetch categories', error);
@@ -33,9 +33,9 @@ const Categories = () => {
     e.preventDefault();
     try {
       if (editingCategory) {
-        await api.put(`/categories/${editingCategory._id}`, { name, type });
+        await updateCategory(editingCategory._id, { name, type });
       } else {
-        await api.post('/categories', { name, type });
+        await createCategory({ name, type });
       }
       setIsModalOpen(false);
       fetchCategories();
@@ -47,7 +47,7 @@ const Categories = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this category?')) {
       try {
-        await api.delete(`/categories/${id}`);
+        await deleteCategory(id);
         fetchCategories();
       } catch (error) {
         console.error('Failed to delete category', error);
