@@ -24,31 +24,33 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <nav className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-surface border-r border-slate-200 p-4 flex-col z-50">
-        <div className="flex items-center gap-3 mb-10 px-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-xl">
+      {/* Desktop Top Nav */}
+      <nav className="hidden md:flex fixed top-0 left-0 w-full h-16 bg-surface/90 backdrop-blur-md border-b border-slate-200 px-6 justify-between items-center z-50">
+        {/* Logo */}
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm">
             BT
           </div>
-          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+          <h1 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
             Budget Track
           </h1>
         </div>
 
-        <div className="flex-1 flex flex-col gap-2">
+        {/* Nav Links */}
+        <div className="flex items-center gap-2">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${isActive
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${isActive
                   ? 'bg-primary/10 text-primary font-medium'
                   : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
                   }`}
               >
                 <div className={`${isActive ? 'text-primary' : 'text-slate-500'}`}>
-                  {item.icon}
+                  {React.cloneElement(item.icon, { size: 18 })}
                 </div>
                 {item.name}
               </Link>
@@ -56,17 +58,18 @@ const Navbar = () => {
           })}
         </div>
 
-        <div className="mt-auto border-t border-slate-200 pt-4">
-          <div className="px-4 py-3 mb-2">
-            <p className="text-sm text-slate-500">Logged in as</p>
-            <p className="font-medium text-slate-800 truncate">{user.username}</p>
+        {/* User Actions */}
+        <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Logged in as</span>
+            <span className="text-sm font-medium text-slate-800">{user.username}</span>
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 w-full text-left text-danger hover:bg-danger/10 rounded-xl transition-all"
+            className="flex items-center justify-center p-2 text-danger hover:bg-danger/10 rounded-lg transition-all"
+            title="Logout"
           >
             <LogOut size={20} />
-            Logout
           </button>
         </div>
       </nav>
