@@ -36,7 +36,7 @@ const Register = () => {
       <div className="glass-panel w-full max-w-md p-8 relative z-10">
         <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-slate-900 font-bold text-3xl mx-auto mb-4 shadow-lg shadow-secondary/20">
-            F
+            BT
           </div>
           <h2 className="text-3xl font-bold text-slate-900 mb-2">Create Account</h2>
           <p className="text-slate-500">Join Budget Track today</p>
